@@ -7,6 +7,7 @@
 void swap_bubble(int *array, int x)
 {
 	int tmp = array[x];
+
 	array[x] = array[x + 1];
 	array[x + 1] = tmp;
 }
@@ -24,8 +25,10 @@ void bubble_sort(int *array, size_t size)
 	while (!flag)
 	{
 		flag = 1;
-		for (x = 0; x < size -1; x++)
+		for (x = 0; x < size - 1; x++)
 		{
+			if (!array[x] || !array[x + 1])
+				return;
 			if (array[x] > array[x + 1])
 			{
 				swap_bubble(array, x);
