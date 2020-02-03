@@ -1,39 +1,4 @@
 #include "sort.h"
-/**
- *swap - swap the values
- *@head: the list to be sorted
- *@top: the top of the list
- */
-void swap(listint_t **head, listint_t *top)
-{
-	listint_t *prev = top->prev, *next;
-
-	while (top->prev)
-	{
-		prev = top->prev;
-		if (top->prev && top->n < top->prev->n)
-		{
-			if (top->prev->prev)
-				top->prev->prev->next = top;
-			next = top->next;
-			top->prev->next = next;
-			if (next)
-				next->prev = top->prev;
-			top->next = prev;
-			if (prev)
-			{
-				top->prev = prev->prev;
-				prev->prev = top;
-			}
-			else
-				top->prev = prev;
-		}
-		else
-			break;
-	}
-	if (!top->prev)
-		*head = top;
-}
 
 /**
  *insertion_sort_list - sort list using insertion algorithm
@@ -41,14 +6,40 @@ void swap(listint_t **head, listint_t *top)
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *top = (*list)->next;
+	listint_t *top = (*list)->next, *prev, *next;
 
+	if (!list || !(*list) || !(*list)->next)
+		return;
 	while (top)
 	{
 		if (top->prev && top->prev->n > top->n)
 		{
-			swap(list, top);
-			print_list(*list);
+			while (top->prev)
+			{
+				prev = top->prev;
+				if (top->prev && top->n < top->prev->n)
+				{
+					if (top->prev->prev)
+						top->prev->prev->next = top;
+					next = top->next;
+					top->prev->next = next;
+					if (next)
+						next->prev = top->prev;
+					top->next = prev;
+					if (prev)
+					{
+						top->prev = prev->prev;
+						prev->prev = top;
+					}
+					else
+						top->prev = prev;
+					if (!top->prev)
+						*list = top;
+					print_list(*list);
+				}
+				else
+					break;
+			}
 		}
 		top = top->next;
 	}
