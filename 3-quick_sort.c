@@ -1,69 +1,82 @@
 #include "sort.h"
+
 /**
- *partition - sorting by lomuto quick algorithm
- *@array:the array
- *@low_v: the pos to replace
- *@high_v: the minur pos in array
- */
-size_t partition(int *array, size_t low_v, size_t high_v)
+  * swap_s - swap two element of a list
+  * @array: array
+  * @i: index
+  * @j: j
+  * @size: the array size
+  * Return: nothing
+  */
+void swap_s(int *array, int i, int j, int size)
 {
-        size_t i = 0, j = 0;
-	int pivot = 0, temp = 0, temp1 = 0;
-  
-        pivot = array[high_v];
-        i = low_v;
-	printf("puto3\n");
-        for(j = low_v; j < high_v; j++)
-        {
-                if(array[j] < pivot)
-                {
-                        temp = array[i];
-                        array[i] = array[j];
-                        array[j] = temp;
-                        i++;
-                }
-		printf("%u, %d-%d:%d\n", (unsigned int)j, pivot, array[9], array[j]);
-        }
-        temp1 = array[i];
-        array[i] = array[high_v];
-        array[high_v] = temp1;
-        return(i);
+	int copy_num = 0;
+
+	copy_num = array[i];
+	array[i] = array[j];
+	array[j] = copy_num;
+	print_array(array, size);
 }
 
 /**
- *lomuto - sorting by lomuto quick algorithm
- *@array:the array
- *@low_v: the pos to replace
- *@high_v: the minur pos in array
- */
-int *lomuto_al(int *array, size_t low_v, size_t high_v)
+  * lomuto_p - swap two element of a list
+  * @array: array
+  * @low: index
+  * @high: j
+  * @size: the array size
+  * Return: nothing
+  */
+int lomuto_p(int *array, int low, int high, int size)
 {
-	size_t par = 0;
+	int pivot = 0, i = 0, j = 0;
 
-	printf("puto1\n");
-	if(low_v < high_v)
+	pivot = array[high];
+	i = low;
+	for (j = low; j < high; j++)
 	{
-		printf("puto2\n");
-		par = partition(array, low_v, high_v);
-		lomuto_al(array, low_v, par - 1);
-		lomuto_al(array, par + 1, high_v);
+		if (array[j] <= pivot)
+		{
+			if (j != i)
+				swap_s(array, j, i, size);
+			i++;
+		}
 	}
-	return(array);
+	if (i != high)
+		swap_s(array, i, high, size);
+	return (i);
 }
 
 /**
- *quick_sort - sorting by selection algorithm
- *@array:the array
- *@size: th array of the size
- */
+  * qs_algo - swap two element of a list
+  * @array: array
+  * @low: index
+  * @high: j
+  * @size: the array size
+  * Return: nothing
+  */
+void qs_algo(int *array, int low, int high, int size)
+{
+	int pivot = 0;
+
+	if (low < high)
+	{
+		pivot = lomuto_p(array, low, high, size);
+		qs_algo(array, low, pivot - 1, size);
+		qs_algo(array, pivot + 1, high, size);
+	}
+}
+
+/**
+  * quick_sort - Selection sort
+  * @array: array
+  * @size: size
+  * Return: nothing
+  */
 void quick_sort(int *array, size_t size)
 {
-	size_t low_v = 0, high_v = 0;
-	int *copy_arr = NULL;
+	size_t high = 0, low = 0;
 
-	copy_arr = array;
-	low_v = 0;
-	high_v = size - 1;
-	printf("puto\n");
-	array = lomuto_al(copy_arr, low_v, high_v);
+	high = size - 1;
+	low = 0;
+	qs_algo(array, low, high, size);
 }
