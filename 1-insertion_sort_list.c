@@ -1,11 +1,12 @@
 #include "sort.h"
 /**
  *swap - swap the values
- *@ac: the list to be sorted
+ *@head: the list to be sorted
+ *@top: the top of the list
  */
 void swap(listint_t **head, listint_t *top)
 {
-        listint_t *prev = top->prev, *next;
+	listint_t *prev = top->prev, *next;
 
 	while (top->prev)
 	{
@@ -32,7 +33,6 @@ void swap(listint_t **head, listint_t *top)
 	}
 	if (!top->prev)
 		*head = top;
-        (void) head;
 }
 
 /**
