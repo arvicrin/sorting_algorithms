@@ -35,6 +35,7 @@ listint_t *swap(listint_t **list, listint_t *top)
  */
 int sort_back(listint_t **list, listint_t *top, int *flag)
 {
+	/* printf("back\n"); */
 	while (top)
 	{
 		if (top->prev)
@@ -42,7 +43,7 @@ int sort_back(listint_t **list, listint_t *top, int *flag)
 			if (top->n < top->prev->n)
 			{
 				*flag = 0;
-				top = swap(list, top->prev);
+				top = swap(list, top->prev)->next;
 				print_list(*list);
 			}
 		}
@@ -66,7 +67,7 @@ int sort_back(listint_t **list, listint_t *top, int *flag)
 int sort_fow(listint_t **list, int flag)
 {
 	listint_t *top = *list, *back;
-
+	/* printf("fow\n"); */
 	while (top)
 	{
 		if (top->next)
