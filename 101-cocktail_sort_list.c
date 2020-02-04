@@ -101,12 +101,10 @@ int sort_fow(listint_t **list, int flag)
  */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *top;
 	int flag = 0;
 
 	if (!list || !(*list) || !(*list)->next)
 		return;
-	top = (*list);
 	while (flag == 0)
 	{
 		flag = 1;
