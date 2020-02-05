@@ -98,5 +98,5 @@ void merge_sort(int *array, size_t size)
 
 	copy(array, dest, size);
 	top_down_split(dest, 0, size, array);
-	(void) array;
+	free(dest);
 }
