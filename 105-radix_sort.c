@@ -17,10 +17,11 @@ void copy(int *array, int *dest, size_t size)
 }
 
 /**
- *radix_sort - sort int array performing LSD Radix sorting algorithm
+ *lsd_counting - sort int array performing LSD Radix sorting algorithm
  *@array: the integer array
  *@sorted: the integer array
  *@size: the array size
+ *@exp: exponetial
  */
 void lsd_counting(int *array, int *sorted, size_t size, size_t exp)
 {
