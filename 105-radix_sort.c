@@ -27,9 +27,9 @@ void lsd_counting(int *array, int *sorted, size_t size, size_t exp)
 {
 	size_t bi;
 	int pos = 0;
-	int *buck = malloc(sizeof(int) * size);
+	int *buck = malloc(sizeof(int) * 10);
 
-	for (pos = 0; pos < (int) size; pos++)
+	for (pos = 0; pos < (int) 10; pos++)
 		buck[pos] = 0;
 
 	for (pos = 0; pos < (int) size; pos++)
