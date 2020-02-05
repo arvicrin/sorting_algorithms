@@ -14,14 +14,11 @@ void counting_sort(int *array, size_t size)
 		return;
 
 	for (i = 0; i < si; i++)
+	{
 		if (array[i] > max_num)
 			max_num = array[i];
-
-	for (i = 0; i < max_num + 1; i++)
-		counter[i] = 0;
-
-	for (i = 0; i < si; i++)
 		counter[array[i]] += 1;
+	}
 
 	for (i = 0; i < max_num + 1; i++)
 		if (i - 1 >= 0)
