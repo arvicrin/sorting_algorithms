@@ -55,10 +55,12 @@ void lsd_counting(int *array, int *sorted, size_t size, size_t exp)
 
 void radix_sort(int *array, size_t size)
 {
-	int *sorted, min, max;
-	size_t pos, exp;
+	int *sorted, min = 0, max = 0;
+	size_t pos = 0, exp = 1;
 
-	sorted = malloc(size * (sizeof(int)));
+	if (size < 2)
+		return;
+	sorted = malloc(sizeof(int) * size);
 	copy(array, sorted, size);
 	min = array[0];
 	min = array[0];
