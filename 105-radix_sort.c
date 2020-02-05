@@ -89,7 +89,11 @@ void radix_sort(int *array, size_t size)
 		if (islast == 1)
 			break;
 		if ((int)((max - min) / exp) == 0)
+		{
+			if (max < (int) exp)
+				break;
 			islast = 1;
+		}
 		/* printf("exp: %d, min: %d, max: %d\n ",(int) exp,(int) min,(int) max); */
 		/* printf("comp: %d\n", (int) ((max - min) / exp)); */
 	}
