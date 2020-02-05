@@ -1,4 +1,5 @@
 #include "sort.h"
+#include <math.h>
 /**
  *copy - merge sort algorithm
  *@array: the int array pointer header
@@ -29,7 +30,7 @@ void lsd_counting(int *array, int *sorted, size_t size, size_t exp)
 	int pos = 0;
 	int *buck = malloc(sizeof(int) * 10);
 
-	for (pos = 0; pos < (int) 10; pos++)
+	for (pos = 0; pos < 10; pos++)
 		buck[pos] = 0;
 
 	for (pos = 0; pos < (int) size; pos++)
@@ -52,6 +53,8 @@ void lsd_counting(int *array, int *sorted, size_t size, size_t exp)
 	}
 	free(buck);
 }
+
+
 /**
  *radix_sort - sort int array performing LSD Radix sorting algorithm
  *@array: the integer array
@@ -60,7 +63,7 @@ void lsd_counting(int *array, int *sorted, size_t size, size_t exp)
 
 void radix_sort(int *array, size_t size)
 {
-	int *sorted, min = 0, max = 0;
+	int *sorted, min = 0, max = 0, islast = 0;
 	size_t pos = 0, exp = 1;
 
 	if (size < 2)
@@ -68,7 +71,7 @@ void radix_sort(int *array, size_t size)
 	sorted = malloc(sizeof(int) * size);
 	copy(array, sorted, size);
 	min = array[0];
-	min = array[0];
+	max = array[0];
 	for (pos = 1; pos < size; pos++)
 	{
 		if (array[pos] < min)
@@ -77,12 +80,18 @@ void radix_sort(int *array, size_t size)
 			max = array[pos];
 	}
 	exp = 1;
-	while ((max - min) / exp >= 1)
+	while ((int)((max - min) / exp) >= 0)
 	{
 		lsd_counting(array, sorted, size, exp);
 		print_array(sorted, size);
 		exp *= 10;
 		copy(sorted, array, size);
+		if (islast == 1)
+			break;
+		if ((int)((max - min) / exp) == 0)
+			islast = 1;
+		/* printf("exp: %d, min: %d, max: %d\n ",(int) exp,(int) min,(int) max); */
+		/* printf("comp: %d\n", (int) ((max - min) / exp)); */
 	}
 	free(sorted);
 
