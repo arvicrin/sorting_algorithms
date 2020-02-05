@@ -25,24 +25,29 @@ void copy(int *array, int *dest, size_t size)
  */
 void lsd_counting(int *array, int *sorted, size_t size, size_t exp)
 {
-	size_t bi, pos;
+	size_t bi;
+	int pos = 0;
 	int *buck = malloc(sizeof(int) * size);
 
-	for (pos = 0; pos < size; pos++)
+	for (pos = 0; pos < (int) size; pos++)
 		buck[pos] = 0;
 
-	for (pos = 0; pos < size; pos++)
+	for (pos = 0; pos < (int) size; pos++)
 	{
 		bi = (array[pos] / exp) % 10;
+		/* printf("%u, ", bi); */
 		/* printf("%u\n", bi); */
 		buck[bi] += 1;
 	}
-	for (pos = 1; pos < size; pos++)
+	/* printf("\n"); */
+	/* print_array(buck, size); */
+	for (pos = 1; pos < (int) size; pos++)
 		buck[pos] += buck[pos - 1];
-	for (pos = size - 1; pos > 0; pos--)
+	for (pos = size - 1; pos >= 0; pos--)
 	{
 		bi = (array[pos] / exp) % 10;
 		buck[bi] -= 1;
+		/* printf("bip: %u p: %d\n", buck[bi], pos); */
 		sorted[buck[bi]] = array[pos];
 	}
 	free(buck);
