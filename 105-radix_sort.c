@@ -81,7 +81,7 @@ void radix_sort(int *array, size_t size)
 			max = array[pos];
 	}
 	exp = 1;
-	while ((int)((max - min) / exp) >= 1)
+	while ((max - min) / exp >= 1)
 	{
 		lsd_counting(array, sorted, size, exp);
 		print_array(sorted, size);
