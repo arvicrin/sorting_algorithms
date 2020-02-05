@@ -87,13 +87,6 @@ void radix_sort(int *array, size_t size)
 		print_array(sorted, size);
 		exp *= 10;
 		copy(sorted, array, size);
-		if (((max - min) / exp) == 0 && (int) (exp) <= max)
-		{
-			lsd_counting(array, sorted, size, exp);
-			print_array(sorted, size);
-			exp *= 10;
-			copy(sorted, array, size);
-		}
 	}
 	free(sorted);
 
