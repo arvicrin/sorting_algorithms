@@ -63,7 +63,8 @@ void lsd_counting(int *array, int *sorted, size_t size, size_t exp)
 
 void radix_sort(int *array, size_t size)
 {
-	int *sorted, min = 0, max = 0, islast = 0;
+	int *sorted, min = 0, max = 0;
+	/* islast = 0; */
 	size_t pos = 0, exp = 1;
 
 	if (size < 2)
@@ -80,22 +81,19 @@ void radix_sort(int *array, size_t size)
 			max = array[pos];
 	}
 	exp = 1;
-	while ((int)((max - min) / exp) >= 0)
+	while ((int)((max - min) / exp) >= 1)
 	{
 		lsd_counting(array, sorted, size, exp);
 		print_array(sorted, size);
 		exp *= 10;
 		copy(sorted, array, size);
-		if (islast == 1)
-			break;
-		if ((int)((max - min) / exp) == 0)
+		if (((max - min) / exp) == 0 && (int) (exp) <= max)
 		{
-			if (max < (int) exp)
-				break;
-			islast = 1;
+			lsd_counting(array, sorted, size, exp);
+			print_array(sorted, size);
+			exp *= 10;
+			copy(sorted, array, size);
 		}
-		/* printf("exp: %d, min: %d, max: %d\n ",(int) exp,(int) min,(int) max); */
-		/* printf("comp: %d\n", (int) ((max - min) / exp)); */
 	}
 	free(sorted);
 
