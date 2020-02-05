@@ -8,10 +8,14 @@
   */
 void counting_sort(int *array, size_t size)
 {
-	int counter[200000], c_p[200000], c_a[200000];
+	int *counter = NULL, *c_a = NULL;
 	int max_num = array[0], i = 0, si = size, num = 0;
 
 	if (array == NULL || size < 2)
+		return;
+
+	c_a = malloc(sizeof(int) * size);
+	if (!c_a)
 		return;
 
 	for (i = 0; i < si; i++)
@@ -19,8 +23,15 @@ void counting_sort(int *array, size_t size)
 		c_a[i] = array[i];
 		if (array[i] > max_num)
 			max_num = array[i];
-		counter[array[i]] += 1;
 	}
+	counter = malloc(sizeof(int) * (max_num + 1));
+	if (!counter)
+	{
+		free(c_a);
+		return;
+	}
+	for (i = 0; i < si; i++)
+		counter[array[i]] += 1;
 
 	for (i = 0; i < max_num + 1; i++)
 		if (i - 1 >= 0)
@@ -31,8 +42,10 @@ void counting_sort(int *array, size_t size)
 	for (i = 0; i < si; i++)
 	{
 		num = counter[c_a[i]] - 1;
-		c_p[num] = c_a[i];
-		array[num] = c_p[num];
+		array[num] = c_a[i];
 		counter[c_a[i]] -= 1;
 	}
+
+	free(c_a);
+	free(counter);
 }
