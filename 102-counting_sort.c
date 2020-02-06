@@ -8,9 +8,10 @@
   */
 void counting_sort(int *array, size_t size)
 {
-	int *counter = NULL, *copy = NULL, max_num = array[0], i = 0;
+	int *counter = NULL, *copy = NULL;
+	int max_num = -1, i = 0;
 
-	if (size < 2)
+	if (size <= 1)
 		return;
 
 	for (i = 0; i < (int) size; i++)
@@ -18,6 +19,7 @@ void counting_sort(int *array, size_t size)
 		if (array[i] > max_num)
 			max_num = array[i];
 	}
+
 	counter = malloc(sizeof(int) * (max_num + 1));
 	copy = malloc(sizeof(int) * size);
 
